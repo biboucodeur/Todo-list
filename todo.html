@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TODO - LIST</title>
+    <style>
+        body {
+            background-color: #F4F4F4;
+            color: #333;
+            font-family: 'poppins';
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background-color: white;
+            padding: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        form {
+            width: 300px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 15px;
+            border-radius: 7px;
+        }
+
+        input[type=text] {
+            display: block;
+            height: 30px;
+            width: 90%;
+            margin: 0 auto;
+            border-radius: 7px;
+            text-align: center;
+            outline: none;
+            border: 1px solid;
+        }
+
+        input[type=submit] {
+            display: block;
+            width: 50%;
+            background-color: #6b15ff;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 auto;
+            margin-top: 14px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .boite {
+            width: 300px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 7px;
+            margin-top: 20px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+            text-align: center;
+            overflow-y: auto;
+            max-height: 250px;
+            position: relative;
+        }
+
+        .boite::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        .boite::-webkit-scrollbar-button:start:decrement,
+        .boite::-webkit-scrollbar-button:end:increment {
+            display: none;
+        }
+
+        .boite::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
+
+        .boite::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 5px;
+        }
+
+        .boite::-webkit-scrollbar-button:start:increment,
+        .boite::-webkit-scrollbar-button:end:decrement {
+            display: none;
+        }
+
+        .boite:hover {
+            transform: translateY(-5px);
+        }
+
+        .modifier {
+            background-color: #ffda23;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .supp {
+            background-color: #f81717;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .modifier:hover,
+        .supp:hover,
+        input[type=submit]:hover {
+            background-color: rgb(19, 8, 94);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>TODO LIST</h1>
+        <p>AJOUTER MODIFIER ET SUPPRIMER</p>
+    </header>
+    <form id="userForm">
+        <input type="text" id="entrer" placeholder="Entrer un nom">
+        <input type="submit" value="Ajouter">
+    </form>
+
+    <div class="boite" id="listeUsers">
+
+    </div>
+    <script>
+        function ajouterNom() {
+            var nom = document.getElementById("entrer").value;
+            if (nom !== "") {
+                var div = document.createElement("div");
+                div.innerHTML = `
+                    <h2>Nom : ${nom}</h2>
+                    <button class='modifier' onclick='modifierNom(this)'>Modifier</button>
+                    <button class='supp' onclick='supprimerNom(this)'>Supprimer</button>`;
+                document.getElementById("listeUsers").appendChild(div);
+                document.getElementById("entrer").value = "";
+
+            } else {
+                alert("Veuillez entrer un nom valide.");
+            }
+        }
+
+        function modifierNom(element) {
+            var nouveauNom = prompt("Entrez le nouveau nom :");
+            if (nouveauNom !== null && nouveauNom !== "") {
+                element.parentNode.firstChild.textContent = nouveauNom;
+            }
+        }
+
+        function supprimerNom(element) {
+            if (confirm("Voulez-vous vraiment supprimer ce nom de la liste ?")) {
+                element.parentNode.remove();
+            }
+        }
+
+        document.getElementById("userForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+            ajouterNom();
+        });
+
+    </script>
+
+</body>
+
+</html>
