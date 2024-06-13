@@ -55,6 +55,10 @@
             transition: background-color 0.3s ease;
         }
 
+        .afficherBoite {
+            display: block;
+        }
+
         .boite {
             width: 300px;
             margin: 0 auto;
@@ -67,6 +71,7 @@
             text-align: center;
             overflow-y: auto;
             max-height: 250px;
+            display: none;
             position: relative;
         }
 
@@ -142,13 +147,19 @@
     </header>
     <form id="userForm">
         <input type="text" id="entrer" placeholder="Entrer un nom">
-        <input type="submit" value="Ajouter">
+        <input type="submit" value="Ajouter" class="btn">
     </form>
 
     <div class="boite" id="listeUsers">
 
     </div>
     <script>
+        const boite = document.querySelector(".boite");
+        const btn = document.querySelector(".btn");
+
+        btn.addEventListener("click", () => {
+            boite.style.display = "block";
+        });
         function ajouterNom() {
             var nom = document.getElementById("entrer").value;
             if (nom !== "") {
